@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css");
+    </style>
+</head>
+
+<body class="container col-12 mt-5">
+    <h1>Formulario de Votación:</h1>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="mensaje-error">
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <form id="form">
+        <div class="col-6">
+            <div class="mb-3 row">
+                <label for="name" class="col-4 col-form-label">Nombre y Apellido</label>
+                <div class="col-8">
+                    <input id="name" type="text" class="form-control" placeholder="Nombre y Apellido" name="name">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="alias" class="col-4 col-form-label">Alias</label>
+                <div class="col-8">
+                    <input id="alias" type="text" class="form-control" placeholder="Alias" name="alias">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="rut" class="col-4 col-form-label">RUT</label>
+                <div class="col-8">
+                    <input id="rut" type="text" class="form-control" placeholder="RUT" name="rut">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="email" class="col-4 col-form-label">Email</label>
+                <div class="col-8">
+                    <input id="email" type="email" class="form-control" placeholder="Email" name="email">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="regiones" class="col-4 col-form-label">Región</label>
+                <div class="col-8">
+                    <select class="form-select" id="regiones" name="regiones">
+                        <option value="">Seleccione una Región</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="comunas" class="col-4 col-form-label">Comuna</label>
+                <div class="col-8">
+                    <select class="form-select" id="comunas" name="comunas">
+                        <option value="">Seleccione una Región Primero</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="candidatos" class="col-4 col-form-label">Candidato</label>
+                <div class="col-8">
+                    <select class="form-select" id="candidatos" name="candidatos">
+                        <option value="">Seleccione una Región Primero</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label">Como se enteró de Nosotros:</label>
+            <div class="form-check form-check-inline">
+                <input id="web" class="form-check-input" type="checkbox" value="web" name="web">
+                <label class="form-check-label" for="web">Web</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input id="tv" class="form-check-input" type="checkbox" value="tv" name="tv">
+                <label class="form-check-label" for="tv">TV</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input id="rrss" class="form-check-input" type="checkbox" value="Redes Sociales" name="rrss">
+                <label class="form-check-label" for="rrss">Redes Sociales</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input id="amigo" class="form-check-input" type="checkbox" value="amigo" name="amigo">
+                <label class="form-check-label" for="amigo">Amigo</label>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Votar</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+
+        const form = document.getElementById('form')
+        const toastLiveExample = document.getElementById('liveToast')
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        const onsubmit = (event) => {
+            document.getElementById('error')
+            event.preventDefault()
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]')
+            let seleccionados = 0
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) seleccionados++
+            })
+            if (seleccionados < 2) {
+                toastLiveExample.classList.add('text-bg-danger')
+                document.getElementById('mensaje-error').innerText = 'debe seleccionar 2 opciones en "Como se enteró de Nosotros"'
+                
+                return toastBootstrap.show()
+            }
+            const inputs = form.elements
+            const formData = new FormData()
+            const datos = {}
+            for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].type === 'text' || inputs[i].type === 'email') {
+                    formData.append(inputs[i].name, inputs[i].value)
+                    datos[inputs[i].name] = inputs[i].value
+
+                } else if (inputs[i].type === 'checkbox') {
+                    formData.append(inputs[i].name, inputs[i].checked)
+                    datos[inputs[i].name] = inputs[i].checked
+                } else if (inputs[i].type === 'select-one') {
+                    formData.append(inputs[i].name, inputs[i].value)
+                    datos[inputs[i].name] = inputs[i].value
+                }
+            }
+            // const request = new XMLHttpRequest();
+            // request.open("POST", "php/guardar_datos.php");
+            // request.send(formData);
+            const datosJson = JSON.stringify(datos)
+            formData.set('json', datosJson);
+
+
+            fetch('php/guardar_datos.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status == 'error') {
+                        toastLiveExample.classList.remove('text-bg-primary')
+                        toastLiveExample.classList.add('text-bg-danger')
+                    } else {
+                        toastLiveExample.classList.remove('text-bg-danger')
+                        toastLiveExample.classList.add('text-bg-primary')
+                    }
+                    document.getElementById('mensaje-error').innerText = data.message
+                    toastBootstrap.show()
+                    if (data.status == 'success') {
+                        event.target.reset();
+                    }
+                });
+
+        }
+        form.addEventListener("submit", onsubmit)
+
+        const regionSelect = document.getElementById('regiones');
+        const comunaSelect = document.getElementById('comunas');
+        const candidatoSelect = document.getElementById('candidatos');
+        fetch('php/regiones.php')
+            .then(r => r.json())
+            .then(data => {
+                regionSelect.innerHTML = '<option value="">Seleccione una Región</option>';
+                // Agregar las nuevas opciones
+                data.regiones.forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region.id_region;
+                    option.text = region.nombre_region;
+                    regionSelect.add(option);
+                });
+            })
+        
+        regionSelect.addEventListener('change', () => {
+            fetch('php/comunas.php', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `region_id=${regionSelect.value}`,
+            })
+                .then(r => r.json())
+                .then(data => {
+                    comunaSelect.innerHTML = '<option value="">Seleccione Comuna</option>';
+                    if (regionSelect.value == ""){
+                        comunaSelect.innerHTML = '<option value="">Seleccione una Región Antes</option>';
+                        candidatoSelect.innerHTML = '<option value="">Seleccione una Región Antes</option>';
+                    } else {
+                        comunaSelect.innerHTML = '<option value="">Seleccione Comuna</option>';
+                        candidatoSelect.innerHTML = '<option value="">Seleccione una Comuna Antes</option>';
+                    }
+                    // Agregar las nuevas opciones
+                    data.forEach(comuna => {
+                        const option = document.createElement('option');
+                        option.value = comuna.id_comuna;
+                        option.text = comuna.nombre_comuna;
+                        comunaSelect.add(option);
+                    });
+                })
+        })
+        
+        comunaSelect.addEventListener('change', () => {
+            fetch('php/candidatos.php', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `comuna_id=${comunaSelect.value}`,
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (comunaSelect.value == ""){
+                        candidatoSelect.innerHTML = '<option value="">Seleccione una Comuna Antes</option>';
+                    } else {
+                        candidatoSelect.innerHTML = '<option value="">Seleccione Candidato</option>';
+                    }
+                        
+                    // Agregar las nuevas opciones
+                    data.forEach(candidato => {
+                        const option = document.createElement('option');
+                        option.value = candidato.id_candidato;
+                        option.text = candidato.nombre_candidato;
+                        candidatoSelect.add(option);
+                    });
+                })
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
