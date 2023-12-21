@@ -1,0 +1,25 @@
+Instrucciones para ejecutar el proyecto:
+
+1. Asegúrate de tener PHP instalado en tu sistema.
+
+2. Abre una terminal y navega al directorio del proyecto.
+
+3. Ejecuta el siguiente comando para iniciar el servidor PHP local:
+
+php -S localhost:8000
+
+4. Abre otra terminal y navega al directorio del proyecto.
+
+5. Ejecuta el siguiente comando para poblar la base de datos:
+
+php php/poblar_db.php
+
+6. Accede al proyecto en tu navegador ingresando la siguiente URL:
+
+
+http://localhost:8000
+
+
+¡Listo! Ahora deberías tener el proyecto en funcionamiento.
+
+
