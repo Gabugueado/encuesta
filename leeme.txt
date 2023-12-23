@@ -1,25 +1,39 @@
-Instrucciones para ejecutar el proyecto:
+Instrucciones Para Ejecutar el Proyecto
 
-1. Asegúrate de tener PHP instalado en tu sistema.
+### Requisitos Previos ###
 
-2. Abre una terminal y navega al directorio del proyecto.
+    Asegúrate de tener PHP instalado en tu sistema. (versión PHP 8.3.0)
 
-3. Ejecuta el siguiente comando para iniciar el servidor PHP local:
+    En MacOS 
 
-php -S localhost:8000
+    1. Puedes instalar PHP en macOS utilizando Homebrew con el siguiente comando:
+        brew install php
 
-4. Abre otra terminal y navega al directorio del proyecto.
+    En Windows
 
-5. Ejecuta el siguiente comando para poblar la base de datos:
+    1. Descarga e instala PHP desde el sitio web oficial: https://windows.php.net/download/ .
 
-php php/poblar_db.php
+    2. Después de la instalación, asegúrate de habilitar la extensión 'sqlite3' en el archivo 'php.ini'.
+    Este proyecto utiliza una base de datos SQLite.
 
-6. Accede al proyecto en tu navegador ingresando la siguiente URL:
+### Pasos Para Ejecutar el Proyecto ###
+
+    1. Abre una terminal y navega al directorio del proyecto.
+
+    2. Ejecuta el siguiente comando para crear y poblar la base de datos:
+
+        > php php/poblar_db.php
+        
+    Nota: En caso de error, asegúrate de haber habilitado la extensión 'sqlite3' en el archivo 'php.ini'.
 
 
-http://localhost:8000
+    3. Ejecuta el siguiente comando para iniciar el servidor PHP local:
+
+        > php -S localhost:8000
+
+    4. Accede al proyecto en tu navegador ingresando la siguiente URL:
+
+        > http://localhost:8000
 
 
 ¡Listo! Ahora deberías tener el proyecto en funcionamiento.
-
-

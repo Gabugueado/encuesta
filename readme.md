@@ -16,7 +16,8 @@ Asegúrate de tener PHP instalado en tu sistema. (version PHP 8.3.0)
 1. Descarga e instala PHP desde el sitio web oficial: [PHP para Windows](https://windows.php.net/download/).
 
 2. Después de la instalación, asegúrate de habilitar la extensión `sqlite3` en el archivo `php.ini`.
-   Este proyecto utiliza una base de datos SQLite
+
+Este proyecto utiliza una base de datos SQLite
 
 ## Pasos para ejecutar el proyecto
 
