@@ -17,7 +17,7 @@
     </style>
 </head>
 
-<body class="container col-12 mt-5">
+<body class="container mt-5">
     <h1>Formulario de Votación:</h1>
     <div class="toast-container position-fixed top-0 end-0 p-3">
         <div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive"
@@ -34,9 +34,10 @@
     <form id="form">
         <div class="col-6">
             <div class="mb-3 row">
-                <label for="name" class="col-4 col-form-label">Nombre y Apellido</label>
+                <label for="nombre_apellido" class="col-4 col-form-label">Nombre y Apellido</label>
                 <div class="col-8">
-                    <input id="name" type="text" class="form-control" placeholder="Nombre y Apellido" name="name">
+                    <input id="nombre_apellido" type="text" class="form-control" placeholder="Nombre y Apellido"
+                        name="nombre_apellido">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -48,7 +49,8 @@
             <div class="mb-3 row">
                 <label for="rut" class="col-4 col-form-label">RUT</label>
                 <div class="col-8">
-                    <input id="rut" type="text" class="form-control" placeholder="RUT" name="rut">
+                    <input id="rut" type="text" class="form-control" placeholder="RUT" name="rut"
+                        onkeyup="processChange();">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -146,7 +148,7 @@
         const toastLiveExample = document.getElementById('liveToast')
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         const onsubmit = (event) => {
-            document.getElementById('error')
+
             event.preventDefault()
 
             // validaterut retorna true si es un rut valido
@@ -165,7 +167,7 @@
             if (seleccionados < 2) {
                 toastLiveExample.classList.add('text-bg-danger')
                 document.getElementById('mensaje-error').innerText = 'debe seleccionar 2 opciones en "Como se enteró de Nosotros"'
-                
+
                 return toastBootstrap.show()
             }
             const inputs = form.elements
@@ -189,8 +191,6 @@
             // request.send(formData);
             const datosJson = JSON.stringify(datos)
             formData.set('json', datosJson);
-
-
             fetch('php/guardar_datos.php', {
                 method: 'POST',
                 body: formData
@@ -219,17 +219,17 @@
         const candidatoSelect = document.getElementById('candidatos');
         fetch('php/regiones.php')
             .then(r => r.json())
-            .then(data => {
+            .then(regiones => {
                 regionSelect.innerHTML = '<option value="">Seleccione una Región</option>';
                 // Agregar las nuevas opciones
-                data.regiones.forEach(region => {
+                regiones.forEach(region => {
                     const option = document.createElement('option');
                     option.value = region.id_region;
                     option.text = region.nombre_region;
                     regionSelect.add(option);
                 });
             })
-        
+
         regionSelect.addEventListener('change', () => {
             fetch('php/comunas.php', {
                 method: 'post',
@@ -241,7 +241,7 @@
                 .then(r => r.json())
                 .then(data => {
                     comunaSelect.innerHTML = '<option value="">Seleccione Comuna</option>';
-                    if (regionSelect.value == ""){
+                    if (regionSelect.value == "") {
                         comunaSelect.innerHTML = '<option value="">Seleccione una Región Antes</option>';
                         candidatoSelect.innerHTML = '<option value="">Seleccione una Región Antes</option>';
                     } else {
@@ -257,7 +257,7 @@
                     });
                 })
         })
-        
+
         comunaSelect.addEventListener('change', () => {
             fetch('php/candidatos.php', {
                 method: 'post',
@@ -268,12 +268,12 @@
             })
                 .then(r => r.json())
                 .then(data => {
-                    if (comunaSelect.value == ""){
+                    if (comunaSelect.value == "") {
                         candidatoSelect.innerHTML = '<option value="">Seleccione una Comuna Antes</option>';
                     } else {
                         candidatoSelect.innerHTML = '<option value="">Seleccione Candidato</option>';
                     }
-                        
+
                     // Agregar las nuevas opciones
                     data.forEach(candidato => {
                         const option = document.createElement('option');
@@ -283,11 +283,7 @@
                     });
                 })
         })
-
-
-
     </script>
-
 </body>
 
 </html>

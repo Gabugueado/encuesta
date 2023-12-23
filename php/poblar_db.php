@@ -1,10 +1,10 @@
 <?php
-// Conexión a la base de datos (ajusta las credenciales según tu configuración)
-
-$pdo = new PDO('sqlite:encuesta.db');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try {
+    // Conectando a la base de datos
+    $pdo = new PDO('sqlite:encuesta.db');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
     // Ruta al archivo SQL
     $sqlFilePath = "./db/script.sql";
 
@@ -13,10 +13,9 @@ try {
 
     // Ejecuta el contenido del archivo SQL
     $pdo->exec($sqlContent);
-
-    echo "Script SQL ejecutado exitosamente.";
+    echo 'Script ejecutado exitosamente.';
 } catch (PDOException $e) {
-    echo "Error en la base de datos: " . $e->getMessage();
+    echo 'Error en la base de datos: ' . $e->getMessage();
 } catch (Exception $e) {
-    echo "Error general: " . $e->getMessage();
+    echo 'Error general: ' . $e->getMessage();
 }
