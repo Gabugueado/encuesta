@@ -110,7 +110,36 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="./assets/js/validar-rut.js"></script>
+    <script>
 
+        const debounce = (func, timeout = 1500) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => { func.apply(this, args); }, timeout);
+            };
+        }
+
+        const validarRut = () => {
+            const rut = document.getElementById('rut')
+            if (validate(rut.value)) {
+                toastLiveExample.classList.remove('text-bg-danger')
+                toastLiveExample.classList.add('text-bg-primary')
+                rut.value = format(rut.value)
+                document.getElementById('mensaje-error').innerText = 'rut valido'
+                toastBootstrap.show()
+            } else {
+                toastLiveExample.classList.remove('text-bg-primary')
+                toastLiveExample.classList.add('text-bg-danger')
+                document.getElementById('mensaje-error').innerText = 'rut invalido'
+                toastBootstrap.show()
+                return;
+            }
+        }
+        const processChange = debounce(() => validarRut());
+
+    </script>
     <script>
 
         const form = document.getElementById('form')
@@ -119,6 +148,15 @@
         const onsubmit = (event) => {
             document.getElementById('error')
             event.preventDefault()
+
+            // validaterut retorna true si es un rut valido
+            if (!validate(rut.value)) {
+                toastLiveExample.classList.add('text-bg-danger')
+                document.getElementById('mensaje-error').innerText = 'rut invalido'
+                return toastBootstrap.show()
+            }
+
+
             const checkboxes = document.querySelectorAll('input[type="checkbox"]')
             let seleccionados = 0
             checkboxes.forEach(checkbox => {
